@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{% block title %}<h1>Monte Carlo's Flying Circus</h1>{% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="{{ url_for('static', filename='hist01.js') }}"></script>
+
+</head>
+
+<body onload="
+    document.getElementById('bu').value = '{{bu}}';
+    document.getElementById('extract_date').value = '{{extract_date}}';
+    document.getElementById('mitigation').value = '{{mitigation}}';
+    fn({{x1}});
+">
+
+{% block content %}
+<div id="my_dataviz"></div>
+
+  <form method="post" >
+
+        <label for="sample_size">Sample Size</label>
+     <input name="sample_size" id="sample_size" value={{sample_size}}><p/>
+        <label for="number_of_repeats">Number Of Repeats</label>
+      <input name="number_of_repeats" id="number_of_repeats" value={{number_of_repeats}}><p/>
+
+
+
+    <label for="bu">Business Unit</label>
+    <select name="bu" id="bu" >
+    <option value="A14">A14</option>
+    <option value="A14 Section 1">A14 Section 1</option>
+    <option value="A14 Section 2">A14 Section 2</option>
+    <option value="A14 Section 3">A14 Section 3</option>
+    <option value="A14 Section 4">A14 Section 4</option>
+    <option value="A14 Section 5">A14 Section 5</option>
+    <option value="A14 Section 6">A14 Section 6</option>
+    <option value="A14 Core">A14 Core</option>
+    <option value="A14 HE">A14 HE</option>
+    <option value="A14 Utilities">A14 Utilities</option>
+</select> <p/>
+
+    <label for="extract_date">Extract Date</label>
+
+    <select name="extract_date" id="extract_date">
+     <option value="2018-05-30">2018-05-30</option>
+     <option value="2018-06-27">2018-06-27</option>
+     <option value="2018-07-27">2018-07-27</option>
+     <option value="2018-09-05">2018-09-05</option>
+     <option value="2018-10-03">2018-10-03</option>
+     <option value="2018-10-31">2018-10-31</option>
+     <option value="2018-12-05">2018-12-05</option>
+     <option value="2019-01-04">2019-01-04</option>
+
+</select><p/>
+
+
+
+    <label for="mitigation">Mitigation</label>
+    <select name="mitigation" id="mitigation">
+     <option value="Inherent">Inherent</option>
+     <option value="Residual">Residual</option>
+     <option value="Target">Target</option>
+</select><p/>
+
+
+    <input type="submit" value="Save"><p>
+  </form>
+
+<input type="button" onclick="fn({{x1}});" value="GO!">
+
+
+
+{% endblock %}
+
+
+
+
+
+</body>
+</html>
